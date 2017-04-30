@@ -1,0 +1,117 @@
+﻿C:\Users\Mafr>C:\Users\Mafr\Desktop\pgsql\bin\psql.exe -U ag7420 -dag7420 -h 104.199.20.214
+
+Password: ukq2wl3i
+
+
+create table person
+( pid           serial primary key,
+  fnamn       text not null,
+  enamn     text not null
+);
+
+
+create table kontaktperson(pid integer, band text not null);
+
+create table bandinfo (pid integer, band text not null, land text not null);
+
+create table jobbare ( pid integer, personnummer integer, adress text not null);
+
+
+
+insert into person(pid,fnamn,enamn) values (101, 'Max', 'Frennessen');
+insert into jobbare(pid,personnummer,adress) values (101,940114,'Stormgatan 4');
+
+
+insert into person(pid,fnamn,enamn) values (111,'Julian' ,'Casablancas');
+insert into person(pid,fnamn,enamn) values (112,'Nick', 'Valensi');
+insert into person(pid,fnamn,enamn) values (113,'Nikolai' ,'Fraiture');
+insert into person(pid,fnamn,enamn) values (114,'Albert', 'Hammond');
+insert into person(pid,fnamn,enamn) values (115,,Fabrizio' ,'Moretti');
+
+
+insert into bandinfo(pid,band,land) values (111,'The Strokes','U.S.A');
+insert into bandinfo(pid,band,land) values (112,'The Strokes','U.S.A');
+insert into bandinfo(pid,band,land) values (113,'The Strokes','U.S.A');
+insert into bandinfo(pid,band,land) values (114,'The Strokes','U.S.A');
+insert into bandinfo(pid,band,land) values (115,'The Strokes','U.S.A');
+
+
+
+select * from(person as p join bandinfo as b on p.pid = b.pid);
+select p.fnamn,p.enamn,b.band from(person as p join bandinfo as b on p.pid=b.pid) where b.band = 'The Strokes';
+
+
+
+
+insert into person(pid,fnamn,enamn) values (118,'Elvis' ,'Presley');
+
+insert into person(pid,fnamn,enamn) values (117,'Johanna' ,'Söderberg');
+insert into person(pid,fnamn,enamn) values (116,'Klara' ,'Söderberg');
+
+
+
+insert into bandinfo(pid,band,land) values (118,'Elvis Presley','U.S.A');
+
+insert into bandinfo(pid,band,land) values (117,'First aid kit','Sverige');
+insert into bandinfo(pid,band,land) values (116,'First aid kit','Sverige');
+
+
+
+
+insert into person(pid,fnamn,enamn) values (201,'Per', 'Persson');
+insert into person(pid,fnamn,enamn) values (202,'Adam', 'Sörenstam');
+insert into person(pid,fnamn,enamn) values (203,'Vidar', 'Ekrot');
+insert into person(pid,fnamn,enamn) values (204,'Stehn', 'Hårdh');
+insert into person(pid,fnamn,enamn) values (205,'Anna', 'Bimbo');
+
+
+insert into jobbare(pid,personnummer,adress) values (201, 940718, 'Grävlingestigen 4');
+insert into jobbare(pid,personnummer,adress) values (202, 881202, 'Yxgatan 14');
+insert into jobbare(pid,personnummer,adress) values (203, 910320, 'Västra Götgatan 2');
+insert into jobbare(pid,personnummer,adress) values (204, 410312, 'BonerStreet 1337');
+insert into jobbare(pid,personnummer,adress) values (205, 960205, 'Kröningsgatan 25');
+
+
+
+insert into kontaktperson(pid,band) values (202, 'Elvis Presley');
+insert into kontaktperson(pid,band) values (205, 'First aid kit');
+insert into kontaktperson(pid,band) values (202, 'The Strokes');
+
+
+insert into person(pid,fnamn,enamn) values (119,'Lisa', 'Nilsson');
+
+select p.fnamn,p.enamn,k.band from(kontaktperson as k join person as p on p.pid = k.pid)
+ where band = 'The Strokes';
+
+
+insert into bandinfo(pid,band,land) values (119,'Lisa Nilsson','Sverige');
+
+select fnamn,enamn, band from(person as p join kontaktperson as k on p.pid=k.pid);
+
+insert into person(pid,fnamn,enamn) values (120,'Alexander', 'Turner');
+insert into person(pid,fnamn,enamn) values (121,'Jamie', 'Cook');
+insert into person(pid,fnamn,enamn) values (122,'Matthew', 'Helders');
+insert into person(pid,fnamn,enamn) values (123,'Nick', '"O'Maley"');
+
+
+
+
+insert into bandinfo(pid,band,land) values (120,'Arctic Monkeys','England');
+insert into bandinfo(pid,band,land) values (121,'Arctic Monkeys','England');
+insert into bandinfo(pid,band,land) values (122,'Arctic Monkeys','England');
+insert into bandinfo(pid,band,land) values (123,'Arctic Monkeys','England');
+
+
+select p.pid,fnamn,enamn, band from(person p join bandinfo as b on p.pid=b.pid);
+
+
+create table spelschema(band text not null, scene text not null, tid text not null primary key, land text not null);
+
+insert into spelschema(band, scene,tid, land) values ('The Strokes','Mallorcascenen','20:15','U.S.A');
+insert into spelschema(band, scene,tid, land) values ('First aid kit','Mallorcascenen','19:40','Sverige');
+insert into spelschema(band, scene,tid, land) values ('Elvis Presley','Mallorcascenen','20:40','U.S.A');
+insert into spelschema(band, scene,tid, land) values ('First aid kit','Mallorcascenen','21:15','Sverige');
+
+
+
+

@@ -1,0 +1,95 @@
+
+Database: ag7420
+User: ag7420
+Password: lpc6hvpi
+
+psql -U ag7420 -d ag7420-h pgserver.mah.se
+
+Create table Medlem (Medlemsnr integer primary key, Namn text not null, Adress text not null,
+Betalt text not null);
+
+Create table Hund(Regnr text not null primary key, Namn text not null, Ras text not null, fodelsear integer,
+agarmedlemsnr integer, FarRegnr text, MorRegnr text);
+
+insert into medlem (medlemsnr,namn,adress, betalt) values (3,'Kalle Svensson', 'Blomsterg.11', 'Ja');
+insert into medlem (medlemsnr,namn,adress, betalt) values (1,'Lisa Olsson', 'Kvackarvägen 7', 'Ja');
+insert into medlem (medlemsnr,namn,adress, betalt) values (5,'Sten Hårdh', 'Boxargrämd 2', 'Nej');
+insert into medlem (medlemsnr,namn,adress, betalt) values (2,'Anna Grahn', 'Tallkottev 10', 'Nej');
+insert into medlem (medlemsnr,namn,adress, betalt) values (4,'Lars bohlin', 'Tulpanv. 9', 'Ja');
+
+
+
+
+
+insert into Hund(Regnr, Namn, Ras,fodelsear ,agarmedlemsnr, FarRegnr,MorRegnr) values 
+('AKCHD185436', 'Karo', 'Afghan', 2002, 3, null, null);
+
+insert into Hund(Regnr, Namn, Ras,fodelsear ,agarmedlemsnr, FarRegnr,MorRegnr) values 
+('AKCHD782353', 'Pluttan', 'Beagle', 1998, 3, null, null);
+
+insert into Hund(Regnr, Namn, Ras,fodelsear ,agarmedlemsnr, FarRegnr,MorRegnr) values 
+('AKCHD685940', 'Hero', 'Varghund', 2004, 5, null, null);
+
+insert into Hund(Regnr, Namn, Ras,fodelsear ,agarmedlemsnr, FarRegnr,MorRegnr) values 
+('AKCHD532018', 'Bellevain', 'Pudel', 2008, 3, null, null);
+
+insert into Hund(Regnr, Namn, Ras,fodelsear ,agarmedlemsnr, FarRegnr,MorRegnr) values 
+('AKCHD574839', 'Karo', 'Tax', 1995, 1, null, null);
+
+insert into Hund(Regnr, Namn, Ras,fodelsear ,agarmedlemsnr, FarRegnr,MorRegnr) values 
+('AKCHD121345', 'Lillen', 'Beauceron', 2005, 1, null, null);
+
+insert into Hund(Regnr, Namn, Ras,fodelsear,agarmedlemsnr, FarRegnr,MorRegnr) values 
+('AKCHD185439', 'Benke', 'Dobermann', 2005, 5, null, null);
+
+insert into Hund(Regnr, Namn, Ras,fodelsear ,agarmedlemsnr, FarRegnr,MorRegnr) values 
+('AKCHD234507', 'Lufsen', 'Blandras', 1996, 10, null, null);
+
+select * from medlem;
+select * from hund;
+
+
+Create table telefonNmr (telefonNummer text not null primary key,medlemsnr integer);
+insert into telefonNmr (telefonNummer, medlemsnr) values ('070-32123213', 1);
+insert into telefonNmr (telefonNummer, medlemsnr) values ('070-98756423', 2);
+insert into telefonNmr (telefonNummer, medlemsnr) values ('070-74581250', 3);
+insert into telefonNmr (telefonNummer, medlemsnr) values ('070-13371337', 4);
+insert into telefonNmr (telefonNummer, medlemsnr) values ('070-73317331', 5);
+insert into telefonNmr (telefonNummer, medlemsnr) values ('070-123456789',4);
+
+select * from telefonNmr;
+
+update medlem
+set betalt = 'Ja'
+where medlemsnr = 5;
+
+
+
+delete from medlem
+where medlemsnr = 2;
+
+select * frommedlem;
+
+
+update hund
+set morregn r= 'AKCHD321567'
+where namn = 'Hero';
+
+
+update hund
+set farregnr = 'AKCHD185436'
+where namn = 'Lufsen';
+
+
+
+update hund
+set morregnr = 'AKCHD782353'
+where namn = 'Lufsen';
+
+
+select * from hund
+
+
+
+
+

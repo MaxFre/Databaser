@@ -1,0 +1,59 @@
+﻿
+Database: ag7420
+User: ag7420
+Password: lpc6hvpi
+
+select * from anstalld order by lon desc;
+
+select namn from projekt where kund='internt';
+
+select namn, adress from anstalld  where namn like  '%son%';
+
+
+
+select telefonnummer,namn from ( telefonnmr as t left join medlem as m on t.medlemsnr = m.medlemsnr);
+
+select h.namn,ras,fodelsear from(hund as h left join medlem as m on h.agarmedlemsnr = m.medlemsnr) 
+where m.namn = 'Kalle Svensson';
+
+
+select anstid,a.namn,avd.namn,avd.ort from(anstalld as a left join avdelning as avd on a.avd =avdid);
+
+select p.namn,kund from(avdelning as a left join projekt as p on a.avdid = p.ansavd) where a.ort = 'Stockholm';
+
+
+select a.anstid, a.namn, j.timperv from( anstalld as a join jobbari as j on a.anstid = j.anstid join projekt as p on p.projid = j.projid) where p.namn = 'Perpetuum Mobile';
+
+
+
+anstdata=> select ans.namn, avdid from ( avdelning as avd join anstalld as ans on avd.avdid = ans.avd join anstalld as ans2 join avdelning as avd2 on ans2.avdid =avd2.chefsid ) where ans.namn = 'Per Persson';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
