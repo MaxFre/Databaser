@@ -20,8 +20,8 @@ public class Gui extends JFrame implements ActionListener{
 	
 	private JLabel helloText = new JLabel("FIRST PROTOTYP");
 	private TextArea respons = new TextArea("RESPONS");
-	private TextField who = new TextField("*");
-	private TextField from = new TextField("hund");
+	private TextField who = new TextField();
+	private TextField from = new TextField();
 	private JButton getAll = new JButton("Get all");
 	private JButton getFrom = new JButton("From");
 	private JButton search = new JButton("Search");
@@ -85,19 +85,15 @@ public class Gui extends JFrame implements ActionListener{
 		add(getAll);
 		add(helloText);
 		add(respons);
+	
 		
-//		search.setEnabled(false);
-//
-//		while(who.getText().length() > 0 && from.getText().length() > 0) {
-//			search.setEnabled(true);
-//		}
-
+		getJobbare.addActionListener(this);
 		getTabeller.addActionListener(this);
 		getContact.addActionListener(this);
 		getSpelSchema.addActionListener(this);
 		getBand.addActionListener(this);
 		search.addActionListener(this);
-		getJobbare.addActionListener(this);
+		
 		getAll.addActionListener(this);
 	}
 	
@@ -105,8 +101,14 @@ public class Gui extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource() == getTabeller) {
+			getJobbare.setEnabled(true);
+			getTabeller.setEnabled(false);
+			getContact.setEnabled(true);
+			getSpelSchema.setEnabled(true);
+			getBand.setEnabled(true);
 			
-			String toDo = "";
+			getTabeller.setEnabled(false);
+			String toDo = "\\dt";
 			try {				
 				controller = new Controller("tabeller",toDo);
 			} catch (Exception e1) {e1.printStackTrace();}
@@ -115,6 +117,12 @@ public class Gui extends JFrame implements ActionListener{
 		}
 		
 		if (e.getSource() == getContact) {
+			
+			getJobbare.setEnabled(true);
+			getTabeller.setEnabled(true);
+			getContact.setEnabled(false);
+			getSpelSchema.setEnabled(true);
+			getBand.setEnabled(true);
 			
 			String toDo = " select fnamn, enamn, band from (person as p join kontaktperson as k on p.pid=k.pid) order by fnamn asc;";
 			try {				
@@ -126,8 +134,12 @@ public class Gui extends JFrame implements ActionListener{
 		
 		
 		if (e.getSource() == getSpelSchema) {
-			
-			String toDo = "select band,scene, tid from spelschema order by tid asc;";
+			getJobbare.setEnabled(true);
+			getTabeller.setEnabled(true);
+			getContact.setEnabled(true);
+			getSpelSchema.setEnabled(false);
+			getBand.setEnabled(true);
+			String toDo = "select band,scene, tid from spelschema order by scene ,tid asc;";
 			try {				
 				controller = new Controller("schema",toDo);
 			} catch (Exception e1) {e1.printStackTrace();}
@@ -137,7 +149,11 @@ public class Gui extends JFrame implements ActionListener{
 		
 		
 		if (e.getSource() == getJobbare) {
-			
+			getJobbare.setEnabled(false);
+			getTabeller.setEnabled(true);
+			getContact.setEnabled(true);
+			getSpelSchema.setEnabled(true);
+			getBand.setEnabled(true);
 			String toDo = "select p.pid, fnamn, enamn, personnummer, adress from(person p join jobbare as j on p.pid=j.pid);";
 			try {				
 				controller = new Controller("jobbare",toDo);
@@ -146,7 +162,12 @@ public class Gui extends JFrame implements ActionListener{
 			respons.setText(svar);
 		}
 		
-	if (e.getSource() == getBand) {			
+	if (e.getSource() == getBand) {	
+		getJobbare.setEnabled(true);
+		getTabeller.setEnabled(true);
+		getContact.setEnabled(true);
+		getSpelSchema.setEnabled(true);
+		getBand.setEnabled(false);
 			String toDo = "SELECT DISTINCT band, land from(person as p join bandinfo as b on p.pid= b.pid);";
 			try {				
 				controller = new Controller("band", toDo);
@@ -156,7 +177,6 @@ public class Gui extends JFrame implements ActionListener{
 		}
 		
 		if (e.getSource() == getAll) {
-			System.out.println("test");
 			who.setText("<All>");
 		}
 		
