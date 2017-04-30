@@ -1,4 +1,4 @@
-﻿C:\Users\Mafr>C:\Users\Mafr\Desktop\pgsql\bin\psql.exe -U ag7420 -dag7420 -h 104.199.20.214
+﻿Desktop\pgsql\bin\psql.exe -U ag7420 -dag7420 -h 104.199.20.214
 
 Password: ukq2wl3i
 
@@ -16,7 +16,7 @@ create table bandinfo (pid integer, band text not null, land text not null);
 
 create table jobbare ( pid integer, personnummer integer, adress text not null);
 
-
+create table spelschema(band text not null, scene text not null, tid text not null, land text not null);
 
 insert into person(pid,fnamn,enamn) values (101, 'Max', 'Frennessen');
 insert into jobbare(pid,personnummer,adress) values (101,940114,'Stormgatan 4');
@@ -105,12 +105,16 @@ insert into bandinfo(pid,band,land) values (123,'Arctic Monkeys','England');
 select p.pid,fnamn,enamn, band from(person p join bandinfo as b on p.pid=b.pid);
 
 
-create table spelschema(band text not null, scene text not null, tid text not null primary key, land text not null);
 
-insert into spelschema(band, scene,tid, land) values ('The Strokes','Mallorcascenen','20:15','U.S.A');
 insert into spelschema(band, scene,tid, land) values ('First aid kit','Mallorcascenen','19:40','Sverige');
+insert into spelschema(band, scene,tid, land) values ('The Strokes','Mallorcascenen','20:15','U.S.A');
 insert into spelschema(band, scene,tid, land) values ('Elvis Presley','Mallorcascenen','20:40','U.S.A');
-insert into spelschema(band, scene,tid, land) values ('First aid kit','Mallorcascenen','21:15','Sverige');
+insert into spelschema(band, scene,tid, land) values ('Arctic Monkeys','Mallorcascenen','21:15','Sverige');
+
+insert into spelschema(band, scene,tid, land) values ('Elvis Presley','Dieseltaltet','19:40','U.S.A');
+insert into spelschema(band, scene,tid, land) values ('First aid kit','Dieseltaltet','21:15','Sverige');
+insert into spelschema(band, scene,tid, land) values ('Lisa Nilsson','Dieseltaltet','21:15','Sverige');
+insert into spelschema(band, scene,tid, land) values ('The Strokes','Dieseltaltet','23:15','U.S.A');
 
 
 
