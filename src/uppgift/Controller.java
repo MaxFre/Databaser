@@ -15,17 +15,22 @@ public class Controller {
 		Class.forName("org.postgresql.Driver").newInstance();
 		Connection conn = DriverManager
 				.getConnection("jdbc:postgresql://104.199.20.214/ag7420?user=ag7420&password=ukq2wl3i");
-		
+
 		PreparedStatement stmt = conn.prepareStatement(toDo);
 		ResultSet rs = stmt.executeQuery();
 
 		while (rs.next()) {
 
-			if (vad.equals("tabeller")) {				
-				respons += "Förnamn: " + rs.getString(1) + " " + rs.getString(2) + "  Band: " + rs.getString(3) + "\n";
+//			if (vad.equals("tabeller")) {
+//				respons += "Förnamn: " + rs.getString(1) + " " + rs.getString(2) + "  Band: " + rs.getString(3) + "\n";
+//			}
+			
+			if (vad.equals("visaM")) {
+				respons += "Namn: " + rs.getString(1) + " " + rs.getString(2) + "\n";
 			}
-			
-			
+			if (vad.equals("visa")) {
+				respons += "Band: " + rs.getString(1) + " Scene:" + rs.getString(2) + "  Tid:" + rs.getString(3) + "\n";
+			}
 			if (vad.equals("Contact")) {
 				respons += "Förnamn: " + rs.getString(1) + " " + rs.getString(2) + "  Band: " + rs.getString(3) + "\n";
 			}

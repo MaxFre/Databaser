@@ -1,5 +1,5 @@
 package uppgift;
-import java.awt.BorderLayout;
+
 import java.awt.Dimension;
 import java.awt.TextArea;
 import java.awt.TextField;
@@ -11,35 +11,24 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
-
-
-
-public class Gui extends JFrame implements ActionListener{ 
+public class GuiBesökare extends JFrame implements ActionListener {
 
 	private Controller controller;
-	
-	private JLabel helloText = new JLabel("Admin");
+	private JLabel showMembers = new JLabel("Visa alla medlemmar i:");
+	private JLabel showAll = new JLabel("Visa alla spelningar för:");
+	private JLabel helloText = new JLabel("Visitors");
 	private TextArea respons = new TextArea("RESPONS");
-	private TextField who = new TextField("*");
-	private TextField from = new TextField("hund");
-	private JButton getAll = new JButton("Get all");
+	private TextField Members = new TextField();
+	private TextField from = new TextField();
+	private JButton searchMembers = new JButton("Search");
 	private JButton getFrom = new JButton("From");
 	private JButton search = new JButton("Search");
-	
-	private JButton getJobbare = new JButton("Jobbare");
-	private JButton getTabeller = new JButton("Tabeller");
+
 	private JButton getContact = new JButton("Kontakt");
 	private JButton getSpelSchema = new JButton("Schema");
 	private JButton getBand = new JButton("Bandinfo");
-	
-	
-	private String selectWho;
-	private String fromWhat;
-	
-	
-	
-	public Gui() {
 
+	public GuiBesökare() {
 		new JScrollPane(respons);
 		setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,75 +36,59 @@ public class Gui extends JFrame implements ActionListener{
 		pack();
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setVisible(true);;
-		
-		buildGui();	
+		setVisible(true);
+		;
+
+		buildGui();
 	}
-	
-	public void buildGui(){
+
+	public void buildGui() {
+
 		helloText.setFont(helloText.getFont().deriveFont(64.0f));
 		respons.setFont(respons.getFont().deriveFont(20.0f));
 		
 		
-		helloText.setBounds(20, 10, 300, 50);
-		
+		helloText.setBounds(50, 10, 300, 50);
+
 		respons.setBounds(200, 100, 600, 300);
-		
-		getAll.setBounds(125, 80, 70, 30);
-		who.setBounds(20, 80, 100, 30);
-		
+
+		showMembers.setBounds(20, 220, 150, 30);
+		showAll.setBounds(20, 80, 150, 30);
+
 		getFrom.setBounds(125, 120, 70, 30);
 		from.setBounds(20, 120, 100, 30);
-		
-		
-		getTabeller.setBounds(640, 60, 100, 30);
+		Members.setBounds(20, 250, 100, 30);
+
 		getContact.setBounds(530, 60, 100, 30);
-		getJobbare.setBounds(200, 60, 100, 30);
+
 		getBand.setBounds(310, 60, 100, 30);
 		getSpelSchema.setBounds(420, 60, 100, 30);
-		
+
 		search.setBounds(30, 160, 80, 30);
-		
-		add(getTabeller);
+		searchMembers.setBounds(30, 290, 80, 30);
+
+		add(searchMembers);
+		add(Members);
 		add(getContact);
 		add(getSpelSchema);
 		add(getBand);
-		add(getJobbare);
 		add(search);
-		add(getFrom);
+		add(Members);
 		add(from);
-		add(who);
-		add(getAll);
+		add(showAll);
+		add(showMembers);
 		add(helloText);
 		add(respons);
-		
-//		search.setEnabled(false);
-//
-//		while(who.getText().length() > 0 && from.getText().length() > 0) {
-//			search.setEnabled(true);
-//		}
 
-		getTabeller.addActionListener(this);
 		getContact.addActionListener(this);
 		getSpelSchema.addActionListener(this);
 		getBand.addActionListener(this);
 		search.addActionListener(this);
-		getJobbare.addActionListener(this);
-		getAll.addActionListener(this);
+		searchMembers.addActionListener(this);
 	}
-	
-	@Override
+
 	public void actionPerformed(ActionEvent e) {
 		
-		if (e.getSource() == getTabeller) {
-			
-			String toDo = "";
-			try {				
-				controller = new Controller("tabeller",toDo);
-			} catch (Exception e1) {e1.printStackTrace();}
-			String svar = (controller.getRespons());
-			respons.setText("Kontakperson för varje band:\n\n" +svar);
-		}
 		
 		if (e.getSource() == getContact) {
 			
@@ -130,7 +103,7 @@ public class Gui extends JFrame implements ActionListener{
 		
 		if (e.getSource() == getSpelSchema) {
 			
-			String toDo = "select band,scene, tid from spelschema order by scene,tid asc;";
+			String toDo = "select band,scene, tid from spelschema order by scene, tid asc;";
 			try {				
 				controller = new Controller("schema",toDo);
 			} catch (Exception e1) {e1.printStackTrace();}
@@ -138,16 +111,7 @@ public class Gui extends JFrame implements ActionListener{
 			respons.setText(svar);
 		}
 		
-		
-		if (e.getSource() == getJobbare) {
-			
-			String toDo = "select p.pid, fnamn, enamn, personnummer, adress from(person p join jobbare as j on p.pid=j.pid);";
-			try {				
-				controller = new Controller("jobbare",toDo);
-			} catch (Exception e1) {e1.printStackTrace();}
-			String svar = (controller.getRespons());
-			respons.setText(svar);
-		}
+	
 		
 	if (e.getSource() == getBand) {			
 			String toDo = "SELECT DISTINCT band, land from(person as p join bandinfo as b on p.pid= b.pid);";
@@ -158,21 +122,29 @@ public class Gui extends JFrame implements ActionListener{
 			respons.setText(svar);
 		}
 		
-		if (e.getSource() == getAll) {
-			System.out.println("test");
-			who.setText("<All>");
+		if (e.getSource() == searchMembers) {
+			String showBands = Members.getText();
+			
+			String toDo = "select fnamn,enamn from(person as p join bandinfo as b on p.pid=b.pid) where band = '" + showBands+ "'";
+			try {		
+				System.out.println(toDo);
+				controller = new Controller("visaM", toDo);
+			} catch (Exception e1) {e1.printStackTrace();}
+			
+			
+			String svar = (showBands + " medlemmar:\n"+controller.getRespons());
+			respons.setText(svar);
+			
 		}
 		
 		if (e.getSource() == search) {
 			
-			selectWho = who.getText();
-			if(selectWho.equals("<All>")){
-				selectWho = "*";
-			}
-			fromWhat = from.getText();
+			
+			String showBands = from.getText();
 	
+			String toDo = "select * from spelschema where band ='" + showBands+ "' order by tid";
 			try {				
-				controller = new Controller(selectWho, fromWhat);
+				controller = new Controller("visa", toDo);
 			} catch (Exception e1) {e1.printStackTrace();}
 			
 			
@@ -181,6 +153,5 @@ public class Gui extends JFrame implements ActionListener{
 			System.out.println(svar);
 		}
 		
+	  }
 	}
-	
-}
