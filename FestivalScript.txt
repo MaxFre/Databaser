@@ -10,18 +10,43 @@ create table person
 );		
 
 
-create table kontaktperson(pid integer, band text not null,
-primary key (band),foreign key (pid) references person(pid));
+create table kontaktperson
+(pid 	integer,
+ band 	text not null,
+
+primary key (band),
+foreign key (pid) references person(pid)
+);
 
 
-create table bandinfo (pid integer, band text not null, land text not null,primary key (pid),foreign key (pid) references person(pid));
+create table bandinfo 
+(pid 	integer,
+ band 	text not null, 
+land 	text not null,
 
-create table jobbare(pid integer,personnummer integer, adress text not null,
-primary key (pid),foreign key (pid) references person(pid));
+primary key (pid),
+foreign key (pid) references person(pid)
+);
+
+create table jobbare
+(pid 	       integer,
+personnummer   integer, 
+adress         text not null,
+
+primary key (pid),
+foreign key (pid) references person(pid)
+);
 
 
-create table spelschema(band text not null, scene text not null, tid text not null, land text not null, 
-primary key(scene,tid), foreign key (band) references bandinfo(band));
+create table spelschema
+(band      text not null,
+scene      text not null,
+tid        text not null,
+land       text not null,
+ 
+primary key(scene,tid), 
+foreign key (band) references bandinfo(band)
+);
 
 insert into person(pid,fnamn,enamn) values (101, 'Max', 'Frennessen');
 insert into jobbare(pid,personnummer,adress) values (101,940114,'Stormgatan 4');
