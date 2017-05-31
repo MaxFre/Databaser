@@ -26,13 +26,16 @@ public class Controller {
 //			}
 			
 			if (vad.equals("visaM")) {
-				respons += "Namn: " + rs.getString(1) + " " + rs.getString(2) + "\n";
+				respons += "Namn: " + rs.getString(1) + " " + rs.getString(2) + ",  extra  info - " + rs.getString(3) +"\n";
 			}
 			if (vad.equals("visa")) {
-				respons += "Band: " + rs.getString(1) + " Scene:" + rs.getString(2) + "  Tid:" + rs.getString(3) + "\n";
+				respons += "Tid: " + rs.getString(1) + " Scene:" + rs.getString(2)  + "\n";
 			}
 			if (vad.equals("Contact")) {
-				respons += "Förnamn: " + rs.getString(1) + " " + rs.getString(2) + "  Band: " + rs.getString(3) + "\n";
+				respons += "Kontaktperson: " + rs.getString(1) + " " + rs.getString(2) + "  Band: " + rs.getString(3) + "\n";
+			}
+			if (vad.equals("AdminContact")) {
+				respons += "Pid: " + rs.getString(1) + " Person: " + rs.getString(2) + " " + rs.getString(3) + "  Band-id: " + rs.getString(4) + "  Band: "+ rs.getString(5)+ "\n";
 			}
 
 			if (vad.equals("schema")) {
@@ -40,13 +43,27 @@ public class Controller {
 						+ "\n";
 			}
 
+			if (vad.equals("Adminschema")) {
+				respons += "Band: " + rs.getString(1) + "  Scene: " + rs.getString(2) + "  Tid: " + rs.getString(3)
+						+ "  Extra: " + rs.getString(4) + "\n";
+			}
+			
 			if (vad.equals("band")) {
-				respons += "Band: " + rs.getString(1) + "  Land: " + rs.getString(2) + "\n";
+				respons += "Band: " + rs.getString(1)+ "\n";
+			}
+			if (vad.equals("Adminband")) {
+				respons += "Band: " + rs.getString(1) +"          Band-id: " + rs.getString(2) + "\n";
 			}
 
 			if (vad.equals("jobbare")) {
 				respons += "Pid: " + rs.getString(1) + "  Förnamn: " + rs.getString(2) + " " + rs.getString(3)
 						+ "  Personnummer: " + rs.getString(4) + "  Adress: " + rs.getString(5) + "\n";
+			}
+			if (vad.equals("Addband")) {
+				respons = "Added";
+			}
+			if (vad.equals("DeleteBand")) {
+				respons = "Deleted";
 			}
 		}
 		conn.close();
