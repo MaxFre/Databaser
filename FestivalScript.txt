@@ -21,11 +21,13 @@ foreign key (pid) references person(pid)
 
 create table bandinfo 
 (pid 	integer,
- band 	text not null, 
-land 	text not null,
+ bid	integer,
+ land 	text not null,
+ extra  text not null,
 
-primary key (pid),
-foreign key (pid) references person(pid)
+primary key (pid,bid),
+foreign key (pid) references person(pid),
+foreign key (bid) references band(bid)
 );
 
 create table jobbare
@@ -56,14 +58,14 @@ insert into person(pid,fnamn,enamn) values (111,'Julian' ,'Casablancas');
 insert into person(pid,fnamn,enamn) values (112,'Nick', 'Valensi');
 insert into person(pid,fnamn,enamn) values (113,'Nikolai' ,'Fraiture');
 insert into person(pid,fnamn,enamn) values (114,'Albert', 'Hammond');
-insert into person(pid,fnamn,enamn) values (115,,Fabrizio' ,'Moretti');
+insert into person(pid,fnamn,enamn) values (115, 'Fabrizio' ,'Moretti');
 
 
-insert into bandinfo(pid,band,land) values (111,'The Strokes','U.S.A');
-insert into bandinfo(pid,band,land) values (112,'The Strokes','U.S.A');
-insert into bandinfo(pid,band,land) values (113,'The Strokes','U.S.A');
-insert into bandinfo(pid,band,land) values (114,'The Strokes','U.S.A');
-insert into bandinfo(pid,band,land) values (115,'The Strokes','U.S.A');
+insert into bandinfo(pid,bid,land,extra) values (111,01,'U.S.A', 'Is good at drinking beer');
+insert into bandinfo(pid,bid,land,extra) values (112,01,'U.S.A', 'Nothing');
+insert into bandinfo(pid,bid,land,extra) values (113,01,'U.S.A','Knows karaté');
+insert into bandinfo(pid,bid,land,extra) values (114,01,'U.S.A','Sleeps with a blanket');
+insert into bandinfo(pid,bid,land,extra) values (115,01,'U.S.A', 'Fluent in swahili' );
 
 
 
@@ -80,10 +82,11 @@ insert into person(pid,fnamn,enamn) values (116,'Klara' ,'Söderberg');
 
 
 
-insert into bandinfo(pid,band,land) values (118,'Elvis Presley','U.S.A');
+insert into bandinfo(pid,bid,land,extra) values (118, 02 , 'U.S.A', ’Eats alot’);
 
-insert into bandinfo(pid,band,land) values (117,'First aid kit','Sverige');
-insert into bandinfo(pid,band,land) values (116,'First aid kit','Sverige');
+insert into bandinfo(pid,bid,land,extra)  values (117, 03, 'Sverige' , ’not cute blonde’);
+insert into bandinfo(pid,bid,land,extra) values (116, 03, 'Sverige', ’not cute brunette’);
+
 
 
 
@@ -121,15 +124,16 @@ select fnamn,enamn, band from(person as p join kontaktperson as k on p.pid=k.pid
 insert into person(pid,fnamn,enamn) values (120,'Alexander', 'Turner');
 insert into person(pid,fnamn,enamn) values (121,'Jamie', 'Cook');
 insert into person(pid,fnamn,enamn) values (122,'Matthew', 'Helders');
-insert into person(pid,fnamn,enamn) values (123,'Nick', '"O'Maley"');
+insert into person(pid,fnamn,enamn) values (123,'Nick', 'OMaley');
 
 
 
 
-insert into bandinfo(pid,band,land) values (120,'Arctic Monkeys','England');
-insert into bandinfo(pid,band,land) values (121,'Arctic Monkeys','England');
-insert into bandinfo(pid,band,land) values (122,'Arctic Monkeys','England');
-insert into bandinfo(pid,band,land) values (123,'Arctic Monkeys','England');
+insert into bandinfo(pid,bid,land,extra) values (120, 04 , 'England', ’Nothing’);
+insert into bandinfo(pid,bid,land,extra) values (121, 04, 'England', ’Sings in the shower’);
+insert into bandinfo(pid,bid,land,extra) values (122, 04, 'England', ’Something lame’ );
+insert into bandinfo(pid,bid,land,extra) values (123, 04, 'England', ’Extra info bla bla’);
+
 
 
 select p.pid,fnamn,enamn, band from(person as p join bandinfo as b on p.pid=b.pid);
