@@ -26,7 +26,7 @@ public class Controller {
 //			}
 			
 			if (vad.equals("visaM")) {
-				respons += "Namn: " + rs.getString(1) + " " + rs.getString(2) + ",  extra  info - " + rs.getString(3) +"\n";
+				respons += "Namn: " + rs.getString(1) + " " + rs.getString(2) + ",  land - " + rs.getString(3) + ", extra info - " + rs.getString(4) + "\n";
 			}
 			if (vad.equals("visa")) {
 				respons += "Tid: " + rs.getString(1) + " Scene:" + rs.getString(2)  + "\n";

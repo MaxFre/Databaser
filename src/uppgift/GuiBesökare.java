@@ -65,7 +65,7 @@ public class GuiBesökare extends JFrame implements ActionListener {
 		
 		
 		helloText.setFont(helloText.getFont().deriveFont(64.0f));
-		respons.setFont(respons.getFont().deriveFont(20.0f));
+		respons.setFont(respons.getFont().deriveFont(18.0f));
 		
 		
 		helloText.setBounds(50, 10, 300, 50);
@@ -178,7 +178,7 @@ public class GuiBesökare extends JFrame implements ActionListener {
 		
 		if (e.getSource() == getMembers1) {
 			
-			String toDo = "select fnamn, enamn, extra from(person as p join bandinfo as b on p.pid=b.pid)join band on b.bid=band.bid where bandnamn ='The Strokes' order by fnamn asc;";
+			String toDo = "select fnamn, enamn, land,extra from((person join bandinfo on person.pid=bandinfo.pid) join band on bandinfo.bid=band.bid) join artistinfo on artistinfo.pid=person.pid where bandnamn='The Strokes' order by fnamn asc;";
 			try {				
 				controller = new Controller("visaM",toDo);
 			} catch (Exception e1) {e1.printStackTrace();}
@@ -189,7 +189,7 @@ public class GuiBesökare extends JFrame implements ActionListener {
 		
 		if (e.getSource() == getMembers2) {
 			
-			String toDo = "select fnamn, enamn, extra from(person as p join bandinfo as b on p.pid=b.pid)join band on b.bid=band.bid where bandnamn ='Elvis Presley' order by fnamn asc;";
+			String toDo = "select fnamn, enamn, land,extra from((person join bandinfo on person.pid=bandinfo.pid) join band on bandinfo.bid=band.bid) join artistinfo on artistinfo.pid=person.pid where bandnamn='Elvis Presley' order by fnamn asc;";
 			try {				
 				controller = new Controller("visaM",toDo);
 			} catch (Exception e1) {e1.printStackTrace();}
@@ -199,7 +199,7 @@ public class GuiBesökare extends JFrame implements ActionListener {
 		}	
 		if (e.getSource() == getMembers3) {
 			
-			String toDo = "select fnamn, enamn, extra from(person as p join bandinfo as b on p.pid=b.pid)join band on b.bid=band.bid where bandnamn ='First aid kit' order by fnamn asc;";
+			String toDo = "select fnamn, enamn, land,extra from((person join bandinfo on person.pid=bandinfo.pid) join band on bandinfo.bid=band.bid) join artistinfo on artistinfo.pid=person.pid where bandnamn ='First aid kit' order by fnamn asc;";
 			try {				
 				controller = new Controller("visaM",toDo);
 			} catch (Exception e1) {e1.printStackTrace();}
@@ -209,7 +209,7 @@ public class GuiBesökare extends JFrame implements ActionListener {
 		}	
 		if (e.getSource() == getMembers4) {
 			
-			String toDo = "select fnamn, enamn, extra from(person as p join bandinfo as b on p.pid=b.pid)join band on b.bid=band.bid where bandnamn ='Arctic Monkeys' order by fnamn asc;";
+			String toDo = "select fnamn, enamn, land,extra from((person join bandinfo on person.pid=bandinfo.pid) join band on bandinfo.bid=band.bid) join artistinfo on artistinfo.pid=person.pid where bandnamn='Arctic Monkeys' order by fnamn asc;";
 			try {				
 				controller = new Controller("visaM",toDo);
 			} catch (Exception e1) {e1.printStackTrace();}
@@ -219,7 +219,7 @@ public class GuiBesökare extends JFrame implements ActionListener {
 		}	
 		if (e.getSource() == getMembers5) {
 			
-			String toDo = "select fnamn, enamn, extra from(person as p join bandinfo as b on p.pid=b.pid)join band on b.bid=band.bid where bandnamn ='Lisa Nilsson' order by fnamn asc;";
+			String toDo = "select fnamn, enamn, land,extra from((person join bandinfo on person.pid=bandinfo.pid) join band on bandinfo.bid=band.bid) join artistinfo on artistinfo.pid=person.pid where bandnamn='Lisa Nilsson' order by fnamn asc;";
 			try {				
 				controller = new Controller("visaM",toDo);
 			} catch (Exception e1) {e1.printStackTrace();}
@@ -341,7 +341,7 @@ public class GuiBesökare extends JFrame implements ActionListener {
 		if (e.getSource() == searchMembers) {
 			String showBands = Members.getText();
 			hideButtons();
-			String toDo = "select fnamn, enamn, extra from(person as p join bandinfo as b on p.pid=b.pid)join band on b.bid=band.bid where bandnamn ='" + showBands +"' order by fnamn asc;";
+			String toDo = "select fnamn, enamn, land,extra from((person join bandinfo on person.pid=bandinfo.pid) join band on bandinfo.bid=band.bid) join artistinfo on artistinfo.pid=person.pid where bandnamn='" + showBands +"' order by fnamn asc;";
 			try {		
 				System.out.println(toDo);
 				controller = new Controller("visaM", toDo);
